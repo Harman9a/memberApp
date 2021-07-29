@@ -4,7 +4,7 @@ interface iStateInter {
     policyNumber: string;
     masterCardNumber: string;
   };
-  searchResult: Boolean;
+  searchResultType: string;
 }
 
 const iState: iStateInter = {
@@ -13,7 +13,7 @@ const iState: iStateInter = {
     policyNumber: "",
     masterCardNumber: "",
   },
-  searchResult: true,
+  searchResultType: "API",
 };
 
 export const Reducer = (state = iState, actions: any) => {
@@ -26,6 +26,7 @@ export const Reducer = (state = iState, actions: any) => {
           policyNumber: actions.payload.pNumber,
           masterCardNumber: actions.payload.mcNumber,
         },
+        searchResultType: actions.payload.searchType,
       };
     }
     case "SAVE_SEARCH_DATA": {

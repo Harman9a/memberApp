@@ -4,6 +4,7 @@ import { Redirect, Route } from "react-router-dom";
 import Menu from "./components/Menu";
 import MemberSearch from "./pages/MemberSearch";
 import SearchResult from "./pages/SearchResult";
+import MemberSearchApi from "./pages/MemberSearchApi";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -35,10 +36,13 @@ const App: React.FC = () => {
               <Redirect to="/page/MemberSearch" />
             </Route>
             <Route path="/page/MemberSearch" exact={true}>
-              <MemberSearch pageName="MemberSearch" />
+              <MemberSearch pageName="Member Search" />
+            </Route>
+            <Route path="/page/MemberSearchApi" exact={true}>
+              <MemberSearchApi pageName="Member Search Api" />
             </Route>
             <Route path="/page/SearchResult" exact={true}>
-              <SearchResult pageName="SearchResult" />
+              <SearchResult pageName="Search Result" />
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>

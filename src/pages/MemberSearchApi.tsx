@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { saveSearchInputData, saveSearchData } from "../Redux/Actions";
 import Header from "../components/Header";
-import SearchUsing from "../components/MemberSearch/SearchUsing";
+import { SearchUsingSingle } from "../components/MemberSearch/SearchUsing";
 import ServiceDate from "../components/MemberSearch/ServiceDate";
 import Submit from "../components/MemberSearch/Submit";
 
@@ -17,39 +17,39 @@ interface InputData {
   value: String;
 }
 
-const MemberSearch: React.FC<HeaderNanme> = ({ pageName }) => {
-  const [date, setdate] = useState("");
+const MemberSearchApi: React.FC<HeaderNanme> = ({ pageName }) => {
   const [pNumber, setpNumber] = useState("");
-  const [mcNumber, setmcNumber] = useState("");
   const [isError, setIsError] = useState(false);
   const [reset, setReset] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const handleChangeDate = (date: string) => {
-    setReset(false);
-    setdate(date);
-  };
 
   const handleInputData = (data: any) => {
     setReset(false);
     let { id, value } = data;
     if (id == "pn") {
       setpNumber(value);
-    } else if (id == "mcn") {
-      setmcNumber(value);
-    } else {
     }
   };
 
   const handleSubmit = () => {
-    if (date != "" || (pNumber != "" && mcNumber != "")) {
+    if (pNumber != "") {
       setIsError(false);
       dispatch(
-        saveSearchInputData({ date, pNumber, mcNumber, searchType: "Deafult" })
+        saveSearchInputData({
+          date: "",
+          pNumber,
+          mcNumber: "",
+          searchType: "API",
+        })
       );
       dispatch(
-        saveSearchData({ date, pNumber, mcNumber, searchType: "Deafult" })
+        saveSearchData({
+          date: "",
+          pNumber,
+          mcNumber: "",
+          searchType: "API",
+        })
       );
       history.push("/page/SearchResult");
     } else {
@@ -58,9 +58,7 @@ const MemberSearch: React.FC<HeaderNanme> = ({ pageName }) => {
   };
 
   const handleResetForm = () => {
-    setdate("");
     setpNumber("");
-    setmcNumber("");
     setReset(true);
     setIsError(false);
   };
@@ -85,12 +83,11 @@ const MemberSearch: React.FC<HeaderNanme> = ({ pageName }) => {
         ]}
       />
       <div style={{ width: "90%", margin: "6rem 1rem" }}>
-        <ServiceDate reset={reset} getDate={handleChangeDate} />
-        <SearchUsing reset={reset} getData={handleInputData} />
+        <SearchUsingSingle reset={reset} getData={handleInputData} />
         <Submit clickSubmit={handleSubmit} clickReset={handleResetForm} />
       </div>
     </>
   );
 };
 
-export default MemberSearch;
+export default MemberSearchApi;

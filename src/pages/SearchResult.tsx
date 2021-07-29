@@ -18,7 +18,7 @@ const SearchResult: React.FC<HeaderNanme> = ({ pageName }) => {
     fetchDate();
   }, []);
 
-  const fetchDate = () => {
+  const DefaultFeatch = () => {
     axios
       .get("http://harman.webcodice.com/nonRoot/ionic/jsonData/MOCK_DATA.json")
       .then((res) => {
@@ -28,7 +28,8 @@ const SearchResult: React.FC<HeaderNanme> = ({ pageName }) => {
         res.data.map((x: any) => {
           if (
             date == x.dataOfBirth ||
-            (pNumber == x.policyNumber && mcNumber == x.memberCardNumber)
+            pNumber == x.policyNumber ||
+            mcNumber == x.memberCardNumber
           ) {
             let arr = searchResult;
             arr.push(x);
@@ -40,6 +41,39 @@ const SearchResult: React.FC<HeaderNanme> = ({ pageName }) => {
       .catch((err) => {
         console.log(err);
       });
+  };
+  const APIFeatch = () => {
+    axios
+      .get("http://harman.webcodice.com/nonRoot/ionic/jsonData/MOCK_DATA.json")
+      .then((res) => {
+        let date = iState.searchForm.ServiceDate;
+        let pNumber = iState.searchForm.policyNumber;
+        let mcNumber = iState.searchForm.masterCardNumber;
+        res.data.map((x: any) => {
+          if (
+            date == x.dataOfBirth ||
+            pNumber == x.policyNumber ||
+            mcNumber == x.memberCardNumber
+          ) {
+            let arr = searchResult;
+            arr.push(x);
+            setSearchResult(arr);
+            setaa(true);
+          }
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const fetchDate = () => {
+    if (iState.searchResultType == "Default") {
+      DefaultFeatch();
+    }
+    if (iState.searchForm.policyNumber != "") {
+      APIFeatch();
+    }
   };
   return (
     <div>

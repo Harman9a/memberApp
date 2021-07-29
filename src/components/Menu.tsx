@@ -35,6 +35,12 @@ const appPages: AppPage[] = [
     mdIcon: searchSharp,
   },
   {
+    title: "Member Search API",
+    url: "/page/MemberSearchApi",
+    iosIcon: searchOutline,
+    mdIcon: searchSharp,
+  },
+  {
     title: "Search Results",
     url: "/page/SearchResult",
     iosIcon: newspaperOutline,
