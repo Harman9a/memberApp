@@ -18,54 +18,49 @@ const SearchResult: React.FC<HeaderNanme> = ({ pageName }) => {
     fetchDate();
   }, []);
 
-  const DefaultFeatch = () => {
-    axios
-      .get("http://harman.webcodice.com/nonRoot/ionic/jsonData/MOCK_DATA.json")
-      .then((res) => {
-        let date = iState.searchForm.ServiceDate;
-        let pNumber = iState.searchForm.policyNumber;
-        let mcNumber = iState.searchForm.masterCardNumber;
-        res.data.map((x: any) => {
-          if (
-            date == x.dataOfBirth ||
-            pNumber == x.policyNumber ||
-            mcNumber == x.memberCardNumber
-          ) {
+  const fetchDate = () => {
+    if (iState.searchResultType == "Default") {
+      axios
+        .get(
+          "http://harman.webcodice.com/nonRoot/ionic/jsonData/MOCK_DATA.json"
+        )
+        .then((res) => {
+          let date = iState.searchForm.ServiceDate;
+          let pNumber = iState.searchForm.policyNumber;
+          let mcNumber = iState.searchForm.masterCardNumber;
+          res.data.map((x: any) => {
+            if (
+              date == x.dataOfBirth ||
+              pNumber == x.policyNumber ||
+              mcNumber == x.memberCardNumber
+            ) {
+              let arr = searchResult;
+              arr.push(x);
+              setSearchResult(arr);
+              setaa(true);
+            }
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    if (iState.searchForm.policyNumber != "") {
+      axios
+        .get(
+          `https://rcvp3-api.azurewebsites.net/members?policyNumber=${iState.searchForm.policyNumber}`
+        )
+        .then((res) => {
+          res.data.map((x: any) => {
             let arr = searchResult;
             arr.push(x);
             setSearchResult(arr);
             setaa(true);
-          }
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const APIFeatch = () => {
-    axios
-      .get(
-        `https://rcvp3-api.azurewebsites.net/members?policyNumber=${iState.searchForm.policyNumber}`
-      )
-      .then((res) => {
-        res.data.map((x: any) => {
-          let arr = searchResult;
-          arr.push(x);
-          setSearchResult(arr);
-          setaa(true);
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const fetchDate = () => {
-    if (iState.searchResultType == "Default") {
-      DefaultFeatch();
-    }
-    if (iState.searchForm.policyNumber != "") {
-      APIFeatch();
     }
   };
   return (
