@@ -44,22 +44,15 @@ const SearchResult: React.FC<HeaderNanme> = ({ pageName }) => {
   };
   const APIFeatch = () => {
     axios
-      .get("http://harman.webcodice.com/nonRoot/ionic/jsonData/MOCK_DATA.json")
+      .get(
+        `https://rcvp3-api.azurewebsites.net/members?policyNumber=${iState.searchForm.policyNumber}`
+      )
       .then((res) => {
-        let date = iState.searchForm.ServiceDate;
-        let pNumber = iState.searchForm.policyNumber;
-        let mcNumber = iState.searchForm.masterCardNumber;
         res.data.map((x: any) => {
-          if (
-            date == x.dataOfBirth ||
-            pNumber == x.policyNumber ||
-            mcNumber == x.memberCardNumber
-          ) {
-            let arr = searchResult;
-            arr.push(x);
-            setSearchResult(arr);
-            setaa(true);
-          }
+          let arr = searchResult;
+          arr.push(x);
+          setSearchResult(arr);
+          setaa(true);
         });
       })
       .catch((err) => {
