@@ -19,6 +19,7 @@ const SearchResult: React.FC<HeaderNanme> = ({ pageName }) => {
   }, []);
 
   const fetchDate = () => {
+    console.log(iState.searchResultType);
     if (iState.searchResultType == "Default") {
       axios
         .get(
@@ -31,8 +32,7 @@ const SearchResult: React.FC<HeaderNanme> = ({ pageName }) => {
           res.data.map((x: any) => {
             if (
               date == x.dataOfBirth ||
-              pNumber == x.policyNumber ||
-              mcNumber == x.memberCardNumber
+              (pNumber == x.policyNumber && mcNumber == x.memberCardNumber)
             ) {
               let arr = searchResult;
               arr.push(x);
@@ -45,7 +45,10 @@ const SearchResult: React.FC<HeaderNanme> = ({ pageName }) => {
           console.log(err);
         });
     }
-    if (iState.searchForm.policyNumber != "") {
+    if (
+      iState.searchForm.policyNumber != "" &&
+      iState.searchResultType == "API"
+    ) {
       axios
         .get(
           `https://rcvp3-api.azurewebsites.net/members?policyNumber=${iState.searchForm.policyNumber}`

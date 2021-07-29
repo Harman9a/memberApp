@@ -46,10 +46,10 @@ const MemberSearch: React.FC<HeaderNanme> = ({ pageName }) => {
     if (date != "" || (pNumber != "" && mcNumber != "")) {
       setIsError(false);
       dispatch(
-        saveSearchInputData({ date, pNumber, mcNumber, searchType: "Deafult" })
+        saveSearchInputData({ date, pNumber, mcNumber, searchType: "Default" })
       );
       dispatch(
-        saveSearchData({ date, pNumber, mcNumber, searchType: "Deafult" })
+        saveSearchData({ date, pNumber, mcNumber, searchType: "Default" })
       );
       history.push("/page/SearchResult");
     } else {

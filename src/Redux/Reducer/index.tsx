@@ -13,7 +13,7 @@ const iState: iStateInter = {
     policyNumber: "",
     masterCardNumber: "",
   },
-  searchResultType: "API",
+  searchResultType: "Default",
 };
 
 export const Reducer = (state = iState, actions: any) => {
