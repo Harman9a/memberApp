@@ -17,7 +17,9 @@ const ServiceDate: React.FC<getDateInter> = ({ getDate, reset }) => {
   return (
     <div style={{ margin: "2rem 0" }}>
       <div style={{ margin: "1rem 0" }}>
-        <IonLabel style={{ fontSize: "2rem" }}>Service Date</IonLabel>
+        <IonLabel style={{ fontSize: "2rem", color: "white" }}>
+          Service Date
+        </IonLabel>
       </div>
       <IonItem>
         <IonLabel>Select Date</IonLabel>

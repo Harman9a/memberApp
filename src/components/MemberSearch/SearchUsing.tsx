@@ -10,7 +10,9 @@ const SearchUsing: React.FC<getDataInter> = ({ getData, reset }) => {
   return (
     <>
       <div style={{ margin: "4rem 0rem 2rem 0rem" }}>
-        <IonLabel style={{ fontSize: "2rem" }}>Search Using</IonLabel>
+        <IonLabel style={{ fontSize: "2rem", color: "white" }}>
+          Search Using
+        </IonLabel>
       </div>
       <SearchInput
         reset={reset}

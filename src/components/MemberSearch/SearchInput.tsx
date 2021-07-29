@@ -20,7 +20,7 @@ const SearchInput: React.FC<Input> = ({ id, title, getPnumber, reset }) => {
   return (
     <div style={{ margin: "3rem 0" }}>
       <div style={{ margin: "1rem 0" }}>
-        <IonLabel>{title}</IonLabel>
+        <IonLabel style={{ color: "white" }}>{title}</IonLabel>
       </div>
       <IonItem>
         <IonInput
